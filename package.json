@@ -19,5 +19,8 @@
   "bugs": {
     "url": "https://github.com/reyeskevin9767/testing-framework-project/issues"
   },
-  "homepage": "https://github.com/reyeskevin9767/testing-framework-project#readme"
+  "homepage": "https://github.com/reyeskevin9767/testing-framework-project#readme",
+  "dependencies": {
+    "chalk": "^4.1.0"
+  }
 }
