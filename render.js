@@ -11,7 +11,12 @@ const render = async (filename) => {
     resources: 'usable',
   });
 
-  return dom;
+  // Make sure that entire dom is loaded before running tests
+  return new Promise((resolve, reject) => {
+    dom.window.document.addEventListener('DOMContentLoaded', () => {
+      resolve(dom);
+    });
+  });
 };
 
 module.exports = render;
