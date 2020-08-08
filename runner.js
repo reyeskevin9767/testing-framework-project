@@ -10,7 +10,29 @@ class Runner {
   // Run test files
   async runTests() {
     for (let file of this.testFiles) {
-      require(file.name);
+      const beforeEaches = [];
+
+      // Place BeforeEach in an array
+      global.beforeEach = (fn) => {
+        beforeEaches.push(fn);
+      };
+
+      // Run BeforeEaches before running it function
+      global.it = (desc, fn) => {
+        beforeEaches.forEach((func) => func());
+        try {
+          fn();
+          console.log(`OK - ${desc}`);
+        } catch (err) {
+          console.log(`X - ${desc}`);
+          console.log('\t', err.message);
+        }
+      };
+      try {
+        require(file.name);
+      } catch (err) {
+        console.log(err);
+      }
     }
   }
 
